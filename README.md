@@ -16,3 +16,5 @@ Parameters must be contract name above, can be one contract, also can be multipl
 or
 
 `MainnetUpgrade.exe Property AccountManager Safe3`
+
+Please change owner private key before upgrade contract. ownerKey is writed in main of MainnetUpgrade.java & TestnetUpgrade.java.

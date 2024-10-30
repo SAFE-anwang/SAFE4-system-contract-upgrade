@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.anwang</groupId>
+    <artifactId>SAFE4-system-contract-upgrade</artifactId>
+    <version>1.0.1</version>
+
+    <developers>
+        <developer>
+            <name>lemengbin</name>
+            <email>lemengbin1991@gmail.com</email>
+            <organization>anwang</organization>
+            <organizationUrl>https://www.anwang.com</organizationUrl>
+        </developer>
+    </developers>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.web3j</groupId>
+            <artifactId>core</artifactId>
+            <version>4.9.8</version>
+        </dependency>
+    </dependencies>
+
+</project>

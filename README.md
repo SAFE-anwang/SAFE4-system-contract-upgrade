@@ -5,7 +5,7 @@ Runtime: `JDK1.8`
 
 Run `com.anwang.MainnetUpgrade` for auto-upgrade system-contract of `SAFE4-mainnet`
 
-Run `com.anwang.MainnetUpgrade` for auto-upgrade system-contract of `SAFE4-testnet`
+Run `com.anwang.TestnetUpgrade` for auto-upgrade system-contract of `SAFE4-testnet`
 
 Allow auto-upgrade `Property AccountManager MasterNodeStorage MasterNodeLogic SuperNodeStorage SuperNodeLogic SNVote MasterNodeState SuperNodeState Proposal SystemReward Safe3` contract
 

@@ -21,20 +21,10 @@ public class ProxyAdmin {
         contractUtil = new ContractUtil(web3j, chainId, contractAddr.getValue());
     }
 
-    public String upgrade(String privateKey, Address proxy, Address implementation) throws Exception {
-        Function function = new Function("upgrade", Arrays.asList(proxy, implementation), Collections.emptyList());
-        return contractUtil.call(privateKey, function);
-    }
-
     public Address getProxyImplementation(Address proxy) throws Exception {
         Function function = new Function("getProxyImplementation", Collections.singletonList(proxy), Collections.singletonList(new TypeReference<Address>() {
         }));
         List<Type> someTypes = contractUtil.query(function);
         return (Address) someTypes.get(0);
-    }
-
-    public static byte[] getUpgradeData(Address proxy, Address implementation) {
-        Function function = new Function("upgrade", Arrays.asList(proxy, implementation), Collections.emptyList());
-        return Numeric.hexStringToByteArray(FunctionEncoder.encode(function));
     }
 }

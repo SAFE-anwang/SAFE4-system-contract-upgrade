@@ -1,6 +1,7 @@
 package com.anwang.utils;
 
-import com.anwang.contracts.MultiSig;
+import com.anwang.contracts.ProxyAdmin;
+import org.web3j.abi.datatypes.Address;
 import org.web3j.crypto.Hash;
 import org.web3j.utils.Numeric;
 
@@ -42,34 +43,32 @@ public class CommonUtil {
         return bin;
     }
 
-    public static String getProxy(String contractName) throws Exception {
+    public static Address getProxy(String contractName) throws Exception {
         switch (contractName) {
             case "Property":
-                return "0x0000000000000000000000000000000000001000";
+                return new Address("0x0000000000000000000000000000000000001000");
             case "AccountManager":
-                return "0x0000000000000000000000000000000000001010";
+                return new Address("0x0000000000000000000000000000000000001010");
             case "MasterNodeStorage":
-                return "0x0000000000000000000000000000000000001020";
+                return new Address("0x0000000000000000000000000000000000001020");
             case "MasterNodeLogic":
-                return "0x0000000000000000000000000000000000001025";
+                return new Address("0x0000000000000000000000000000000000001025");
             case "SuperNodeStorage":
-                return "0x0000000000000000000000000000000000001030";
+                return new Address("0x0000000000000000000000000000000000001030");
             case "SuperNodeLogic":
-                return "0x0000000000000000000000000000000000001035";
+                return new Address("0x0000000000000000000000000000000000001035");
             case "SNVote":
-                return "0x0000000000000000000000000000000000001040";
+                return new Address("0x0000000000000000000000000000000000001040");
             case "MasterNodeState":
-                return "0x0000000000000000000000000000000000001050";
+                return new Address("0x0000000000000000000000000000000000001050");
             case "SuperNodeState":
-                return "0x0000000000000000000000000000000000001060";
+                return new Address("0x0000000000000000000000000000000000001060");
             case "Proposal":
-                return "0x0000000000000000000000000000000000001070";
+                return new Address("0x0000000000000000000000000000000000001070");
             case "SystemReward":
-                return "0x0000000000000000000000000000000000001080";
+                return new Address("0x0000000000000000000000000000000000001080");
             case "Safe3":
-                return "0x0000000000000000000000000000000000001090";
-            case "MultiSigWallet":
-                return MultiSig.contractAddr.getValue();
+                return new Address("0x0000000000000000000000000000000000001090");
             default:
                 throw new Exception("Unsupported contract");
         }
@@ -146,6 +145,12 @@ public class CommonUtil {
         System.arraycopy(hash, 0, selector, 0, 4);
         String changeRequirementHex = Numeric.toHexString(selector);
 
+        functionSignature = "transferOwnership(Address)";
+        hash = Hash.sha3(functionSignature.getBytes());
+        selector = new byte[4];
+        System.arraycopy(hash, 0, selector, 0, 4);
+        String transferOwnershipHex = Numeric.toHexString(selector);
+
         System.arraycopy(data, 0, selector, 0, 4);
         String srcHex = Numeric.toHexString(selector);
         if (srcHex.equals(addHex)) {
@@ -168,6 +173,9 @@ public class CommonUtil {
         }
         if (srcHex.equals(changeRequirementHex)) {
             return "更改签名数";
+        }
+        if (srcHex.equals(transferOwnershipHex)) {
+            return "更换合约所有者";
         }
         return "未知";
     }

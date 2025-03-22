@@ -173,9 +173,8 @@ public class MultiSig {
     }
 
     public String upgradeContract(String privateKey, String contractName, String contractBin, long timestamp) throws Exception {
-        String proxy = CommonUtil.getProxy(contractName);
         String newImplementation = contractUtil.deploy(privateKey, contractBin);
-        Function function = new Function("upgrade", Arrays.asList(new Address(proxy), new Address(newImplementation)), Collections.emptyList());
+        Function function = new Function("upgrade", Arrays.asList(CommonUtil.getProxy(contractName), new Address(newImplementation)), Collections.emptyList());
         byte[] data = Numeric.hexStringToByteArray(FunctionEncoder.encode(function));
         return submitTransaction(privateKey, ProxyAdmin.contractAddr, BigInteger.ZERO, data, timestamp);
     }
@@ -183,18 +182,18 @@ public class MultiSig {
     public String addProperty(String privateKey, String name, BigInteger value, String description, long timestamp) throws Exception {
         Function function = new Function("add", Arrays.asList(new Utf8String(name), new Uint256(value), new Utf8String(description)), Collections.emptyList());
         byte[] data = Numeric.hexStringToByteArray(FunctionEncoder.encode(function));
-        return submitTransaction(privateKey, new Address(CommonUtil.getProxy("Property")), BigInteger.ZERO, data, timestamp);
+        return submitTransaction(privateKey, CommonUtil.getProxy("Property"), BigInteger.ZERO, data, timestamp);
     }
 
     public String changeIsOfficial4MN(String privateKey, String addr, boolean flag, long timestamp) throws Exception {
         Function function = new Function("changeIsOfficial", Arrays.asList(new Address(addr), new Bool(flag)), Collections.emptyList());
         byte[] data = Numeric.hexStringToByteArray(FunctionEncoder.encode(function));
-        return submitTransaction(privateKey, new Address(CommonUtil.getProxy("MasterNodeLogic")), BigInteger.ZERO, data, timestamp);
+        return submitTransaction(privateKey, CommonUtil.getProxy("MasterNodeLogic"), BigInteger.ZERO, data, timestamp);
     }
 
     public String changeIsOfficial4SN(String privateKey, String addr, boolean flag, long timestamp) throws Exception {
         Function function = new Function("changeIsOfficial", Arrays.asList(new Address(addr), new Bool(flag)), Collections.emptyList());
         byte[] data = Numeric.hexStringToByteArray(FunctionEncoder.encode(function));
-        return submitTransaction(privateKey, new Address(CommonUtil.getProxy("SuperNodeLogic")), BigInteger.ZERO, data, timestamp);
+        return submitTransaction(privateKey, CommonUtil.getProxy("SuperNodeLogic"), BigInteger.ZERO, data, timestamp);
     }
 }

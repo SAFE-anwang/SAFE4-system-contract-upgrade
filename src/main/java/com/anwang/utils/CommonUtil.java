@@ -1,5 +1,6 @@
 package com.anwang.utils;
 
+import com.anwang.contracts.MultiSig;
 import org.web3j.crypto.Hash;
 import org.web3j.utils.Numeric;
 
@@ -68,7 +69,7 @@ public class CommonUtil {
             case "Safe3":
                 return "0x0000000000000000000000000000000000001090";
             case "MultiSigWallet":
-                return "0x0000000000000000000000000000000000001102";
+                return MultiSig.contractAddr.getValue();
             default:
                 throw new Exception("Unsupported contract");
         }
@@ -100,6 +101,7 @@ public class CommonUtil {
                 return "系统奖励合约";
             case "0x0000000000000000000000000000000000001090":
                 return "Safe3迁移合约";
+            case "0x62b31F0eCFF7e26786593118eC25DAD8C9BCB161":
             case "0x0000000000000000000000000000000000001102":
                 return "多签合约";
             default:

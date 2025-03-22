@@ -41,9 +41,13 @@ public class App extends JFrame implements PropertyChangeListener {
 
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
-            app = new App();
-            app.setVisible(true);
-            JOptionPane.showMessageDialog(null, "当前工具将在 " + ContractModel.getInstance().getChainType() + " 中使用，如需更换请在设置中修改");
+            StartupPage startupPage = new StartupPage();
+            startupPage.show();
+            if (startupPage.closeType == 1) {
+                app = new App();
+                app.setVisible(true);
+                JOptionPane.showMessageDialog(null, "当前工具将在 " + ContractModel.getInstance().getChainType() + " 中使用，如需更换请在设置中修改");
+            }
         });
     }
 }

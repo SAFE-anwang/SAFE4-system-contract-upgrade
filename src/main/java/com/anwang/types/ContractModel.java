@@ -1,7 +1,9 @@
 package com.anwang.types;
 
 import com.anwang.contracts.MultiSig;
+import org.web3j.abi.datatypes.Address;
 import org.web3j.protocol.Web3j;
+import org.web3j.protocol.core.methods.response.Web3ClientVersion;
 import org.web3j.protocol.http.HttpService;
 
 import java.beans.PropertyChangeListener;
@@ -13,14 +15,9 @@ public class ContractModel {
     private String url;
     private Web3j web3j;
     private MultiSig multiSig;
-
     private final PropertyChangeSupport support;
 
     private ContractModel() {
-        chainId = 6666666;
-        url = "http://139.162.40.90:8545";
-        web3j = Web3j.build(new HttpService(url));
-        multiSig = new MultiSig(web3j, chainId);
         support = new PropertyChangeSupport(this);
     }
 
@@ -39,16 +36,39 @@ public class ContractModel {
         support.addPropertyChangeListener(listener);
     }
 
-    public void update(long chainId, String url) {
-        if (this.chainId == chainId && this.url.equals(url)) {
-            return;
+    public String init(long chainId, String url) {
+        Web3j newWeb3j = Web3j.build(new HttpService(url));
+        try {
+            Web3ClientVersion clientVersion = newWeb3j.web3ClientVersion().send();
+            if (clientVersion.hasError()) {
+                return clientVersion.getError().getMessage();
+            }
+        } catch (Exception e) {
+            return e.getMessage();
         }
-        long oldChainId = this.chainId;
+
         this.chainId = chainId;
         this.url = url;
-        this.web3j = Web3j.build(new HttpService(url));
+        this.web3j = newWeb3j;
+        if (chainId == 6666666) {
+            MultiSig.contractAddr = new Address("0x62b31F0eCFF7e26786593118eC25DAD8C9BCB161");
+        } else {
+            MultiSig.contractAddr = new Address("0x0000000000000000000000000000000000001102");
+        }
         this.multiSig = new MultiSig(web3j, chainId);
-        support.firePropertyChange("chainId", oldChainId, chainId);
+        return null;
+    }
+
+    public String update(long chainId, String url) {
+        if (this.chainId == chainId && this.url.equals(url)) {
+            return null;
+        }
+        long oldChainId = this.chainId;
+        String ret = init(chainId, url);
+        if (ret == null) {
+            support.firePropertyChange("chainId", oldChainId, chainId);
+        }
+        return ret;
     }
 
     public long getChainId() {
@@ -68,9 +88,9 @@ public class ContractModel {
     }
 
     public String getChainType() {
-        if (chainId == 6666665) {
-            return "主网";
+        if (chainId == 6666666) {
+            return "测试网";
         }
-        return "测试网";
+        return "主网";
     }
 }

@@ -207,7 +207,7 @@ public class TxPage extends JPanel implements PropertyChangeListener {
         }));
         Event RequirementChangeEvent = new Event("RequirementChange", Collections.singletonList(new TypeReference<Uint256>() {
         }));
-        EthFilter eventFilter = new EthFilter(DefaultBlockParameter.valueOf(BigInteger.ZERO), DefaultBlockParameter.valueOf("latest"), MultiSig.contractAddr.getValue()).addOptionalTopics(
+        EthFilter eventFilter = new EthFilter(DefaultBlockParameter.valueOf(BigInteger.valueOf(187370)), DefaultBlockParameter.valueOf("latest"), MultiSig.contractAddr.getValue()).addOptionalTopics(
                 EventEncoder.encode(submissionEvent),
                 EventEncoder.encode(confirmationEvent),
                 EventEncoder.encode(revocationEvent),
@@ -223,7 +223,7 @@ public class TxPage extends JPanel implements PropertyChangeListener {
                             handleRevocation(new Address(log.getTopics().get(1)), Numeric.toBigInt(log.getTopics().get(2)));
                             break;
                         case "Submission":
-                            handleSubmission(new Address(log.getTopics().get(1)), Numeric.toBigInt(log.getTopics().get(2)));
+                            handleSubmission(Numeric.toBigInt(log.getTopics().get(1)));
                             break;
                         case "Execution":
                             handleExecution(new Address(log.getTopics().get(1)), Numeric.toBigInt(log.getTopics().get(2)));
@@ -282,7 +282,7 @@ public class TxPage extends JPanel implements PropertyChangeListener {
         tableModel.fireTableDataChanged();
     }
 
-    private void handleSubmission(Address owner, BigInteger txid) throws Exception {
+    private void handleSubmission(BigInteger txid) throws Exception {
         if (id2pos.containsKey(txid)) {
             return;
         }
@@ -290,7 +290,7 @@ public class TxPage extends JPanel implements PropertyChangeListener {
         boolean isConfirmed = 1 >= required;
         BigInteger confirmCount = BigInteger.ONE;
         List<Address> confirmations = new ArrayList<>();
-        confirmations.add(owner);
+        confirmations = ContractModel.getInstance().getMultiSig().getConfirmations(txid);
         addNewData(new TxDataModel(txid, tx, isConfirmed, confirmCount, confirmations));
         if (!filteredData.isEmpty()) {
             filterTable();

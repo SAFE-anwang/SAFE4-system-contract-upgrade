@@ -1,9 +1,7 @@
 package com.anwang.ui;
 
-import com.anwang.contracts.MultiSig;
 import com.anwang.types.ContractModel;
 import com.anwang.ui.components.CustomPanel;
-import org.web3j.abi.datatypes.Address;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,9 +14,8 @@ public class SettingPage extends JPanel {
     public SettingPage() {
         JLabel netTypeLabel = new JLabel("网络类型：");
         JComboBox<String> netTypeComboBox = new JComboBox<>();
-        netTypeComboBox.addItem("主网");
         netTypeComboBox.addItem("测试网");
-        netTypeComboBox.setSelectedIndex(1);
+        netTypeComboBox.addItem("主网");
 
         JLabel rpcLabel = new JLabel("Http Endpoint：");
         JTextField rpcFiled = new JTextField(30);
@@ -28,24 +25,18 @@ public class SettingPage extends JPanel {
         confirmButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                MultiSig.contractAddr = netTypeComboBox.getSelectedIndex() == 0 ? new Address("0x0000000000000000000000000000000000001102") : new Address("0x62b31F0eCFF7e26786593118eC25DAD8C9BCB161");
-                long chainId = netTypeComboBox.getSelectedIndex() == 0 ? 6666665 : 6666666;
+                long chainId = netTypeComboBox.getSelectedIndex() == 0 ? 6666666 : 6666665;
                 String url = rpcFiled.getText();
                 if (url == null || url.trim().isEmpty()) {
                     JOptionPane.showMessageDialog(null, "请输入相关信息");
                     return;
                 }
-                ContractModel.getInstance().update(chainId, url);
-                JOptionPane.showMessageDialog(null, "当前已切换到 " + netTypeComboBox.getSelectedItem() + "中");
-            }
-        });
-
-        JButton resetButton = new JButton("重置");
-        resetButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                netTypeComboBox.setSelectedItem(ContractModel.getInstance().getChainType());
-                rpcFiled.setText(ContractModel.getInstance().getUrl());
+                String ret = ContractModel.getInstance().update(chainId, url);
+                if (ret == null) {
+                    JOptionPane.showMessageDialog(null, "当前已切换到 " + ContractModel.getInstance().getChainType() + "中");
+                } else {
+                    JOptionPane.showMessageDialog(null, ret);
+                }
             }
         });
 
@@ -63,9 +54,7 @@ public class SettingPage extends JPanel {
         CustomPanel panel1 = new CustomPanel();
         components.clear();
         components.add(confirmButton);
-        components.add(resetButton);
         panel1.addRow(components, 0);
-
 
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();

@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 
 public class MultiSig {
     private final ContractUtil contractUtil;
-    public static Address contractAddr = new Address("0x62b31F0eCFF7e26786593118eC25DAD8C9BCB161");
+    public static Address contractAddr;
 
     public MultiSig(Web3j web3j, long chainId) {
         contractUtil = new ContractUtil(web3j, chainId, contractAddr.getValue());

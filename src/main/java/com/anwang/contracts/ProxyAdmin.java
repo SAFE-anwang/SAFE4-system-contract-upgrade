@@ -1,10 +1,12 @@
 package com.anwang.contracts;
 
+import org.web3j.abi.FunctionEncoder;
 import org.web3j.abi.TypeReference;
 import org.web3j.abi.datatypes.Address;
 import org.web3j.abi.datatypes.Function;
 import org.web3j.abi.datatypes.Type;
 import org.web3j.protocol.Web3j;
+import org.web3j.utils.Numeric;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -13,9 +15,10 @@ import java.util.List;
 public class ProxyAdmin {
 
     private final ContractUtil contractUtil;
+    public static Address contractAddr = new Address("0x0000000000000000000000000000000000000999");
 
     public ProxyAdmin(Web3j web3j, long chainId) {
-        contractUtil = new ContractUtil(web3j, chainId, "0x0000000000000000000000000000000000000999");
+        contractUtil = new ContractUtil(web3j, chainId, contractAddr.getValue());
     }
 
     public String upgrade(String privateKey, Address proxy, Address implementation) throws Exception {
@@ -28,5 +31,10 @@ public class ProxyAdmin {
         }));
         List<Type> someTypes = contractUtil.query(function);
         return (Address) someTypes.get(0);
+    }
+
+    public static byte[] getUpgradeData(Address proxy, Address implementation) {
+        Function function = new Function("upgrade", Arrays.asList(proxy, implementation), Collections.emptyList());
+        return Numeric.hexStringToByteArray(FunctionEncoder.encode(function));
     }
 }

@@ -20,29 +20,34 @@ public class TxDataInfoDialog {
         panel.addRow(components, 0);
 
         components.clear();
+        components.add(new JLabel("发起交易Hash："));
+        components.add(new JLabel(txData.submitTxid));
+        panel.addRow(components, 1);
+
+        components.clear();
         components.add(new JLabel("发起者："));
         components.add(new JLabel(txData.fromName + " (" + txData.from.getValue() + ")"));
-        panel.addRow(components, 1);
+        panel.addRow(components, 2);
 
         components.clear();
         components.add(new JLabel("目标合约："));
         components.add(new JLabel(txData.toName + " (" + txData.to.getValue() + ")"));
-        panel.addRow(components, 2);
+        panel.addRow(components, 3);
 
         components.clear();
         components.add(new JLabel("使用金额："));
         components.add(new JLabel(txData.value.toString()));
-        panel.addRow(components, 3);
+        panel.addRow(components, 4);
 
         components.clear();
         components.add(new JLabel("功能："));
         components.add(new JLabel(txData.function));
-        panel.addRow(components, 4);
+        panel.addRow(components, 5);
 
         components.clear();
-        components.add(new JLabel("执行时间："));
+        components.add(new JLabel("计划执行时间："));
         components.add(new JLabel(txData.executeDate));
-        panel.addRow(components, 5);
+        panel.addRow(components, 6);
 
         components.clear();
         components.add(new JLabel("当前状态："));
@@ -63,13 +68,13 @@ public class TxDataInfoDialog {
             }
         }
         components.add(new JLabel(status));
-        panel.addRow(components, 6);
+        panel.addRow(components, 7);
 
 
         components.clear();
         components.add(new JLabel("确认数:"));
         components.add(new JLabel(txData.confirmCount.toString()));
-        panel.addRow(components, 7);
+        panel.addRow(components, 8);
 
         components.clear();
         components.add(new JLabel("确认者："));
@@ -79,7 +84,12 @@ public class TxDataInfoDialog {
         }
         text += "</html>";
         components.add(new JLabel(text));
-        panel.addRow(components, 8);
+        panel.addRow(components, 9);
+
+        components.clear();
+        components.add(new JLabel("执行交易Hash："));
+        components.add(new JLabel(txData.executeTxid));
+        panel.addRow(components, 10);
 
         components.clear();
         components.add(new JLabel("执行者："));
@@ -88,7 +98,7 @@ public class TxDataInfoDialog {
         } else {
             components.add(new JLabel(txData.executorName));
         }
-        panel.addRow(components, 9);
+        panel.addRow(components, 11);
 
         JOptionPane.showConfirmDialog(
                 null,

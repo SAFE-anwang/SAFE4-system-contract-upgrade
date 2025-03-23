@@ -27,7 +27,7 @@ public class AddOwnerDialog {
         JTextField ownerField = new JTextField(30);
         ((AbstractDocument) ownerField.getDocument()).setDocumentFilter(new HexnumericFilter());
 
-        JLabel dateTimeLabel = new JLabel("执行时间：");
+        JLabel dateTimeLabel = new JLabel("计划执行时间：");
         CustomDateTimePicker dateTimePicker = new CustomDateTimePicker();
         dateTimePicker.setDateTimePermissive(LocalDateTime.now());
 

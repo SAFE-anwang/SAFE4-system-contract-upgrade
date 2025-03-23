@@ -41,7 +41,7 @@ public class ChangeIsOfficialDialog {
         flagComboBox.addItem("增加");
         flagComboBox.addItem("移除");
 
-        JLabel dateTimeLabel = new JLabel("执行时间：");
+        JLabel dateTimeLabel = new JLabel("计划执行时间：");
         CustomDateTimePicker dateTimePicker = new CustomDateTimePicker();
         dateTimePicker.setDateTimePermissive(LocalDateTime.now());
 

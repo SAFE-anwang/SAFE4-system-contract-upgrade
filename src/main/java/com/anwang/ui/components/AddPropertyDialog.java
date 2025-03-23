@@ -43,7 +43,7 @@ public class AddPropertyDialog {
         JScrollPane scrollPane = new JScrollPane(descriptionArea);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 
-        JLabel dateTimeLabel = new JLabel("执行时间：");
+        JLabel dateTimeLabel = new JLabel("计划执行时间：");
         CustomDateTimePicker dateTimePicker = new CustomDateTimePicker();
         dateTimePicker.setDateTimePermissive(LocalDateTime.now());
 

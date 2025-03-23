@@ -61,7 +61,7 @@ public class TxPage extends JPanel implements PropertyChangeListener {
         filterPanel.setMaximumSize(new Dimension(Integer.MAX_VALUE, 60));
         add(filterPanel);
 
-        tableModel = new DefaultTableModel(new Object[]{"序号", "发起者", "目标合约", "金额", "功能", "执行时间", "执行者", "操作", "说明"}, 0) {
+        tableModel = new DefaultTableModel(new Object[]{"序号", "发起者", "目标合约", "金额", "功能", "计划执行时间", "执行者", "操作", "说明"}, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return column == 7;

@@ -29,7 +29,7 @@ public class ChangeRequirementDialog {
         JTextField requirementFiled = new JTextField(30);
         ((AbstractDocument) requirementFiled.getDocument()).setDocumentFilter(new PositiveIntegerFilter());
 
-        JLabel dateTimeLabel = new JLabel("执行时间：");
+        JLabel dateTimeLabel = new JLabel("计划执行时间：");
         CustomDateTimePicker dateTimePicker = new CustomDateTimePicker();
         dateTimePicker.setDateTimePermissive(LocalDateTime.now());
 

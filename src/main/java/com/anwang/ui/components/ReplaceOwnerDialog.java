@@ -31,7 +31,7 @@ public class ReplaceOwnerDialog {
         JTextField newOwnerField = new JTextField(30);
         ((AbstractDocument) newOwnerField.getDocument()).setDocumentFilter(new HexnumericFilter());
 
-        JLabel dateTimeLabel = new JLabel("执行时间：");
+        JLabel dateTimeLabel = new JLabel("计划执行时间：");
         CustomDateTimePicker dateTimePicker = new CustomDateTimePicker();
         dateTimePicker.setDateTimePermissive(LocalDateTime.now());
 

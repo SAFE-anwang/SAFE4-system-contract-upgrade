@@ -29,7 +29,7 @@ public class TxDataModel {
     public String submitTxid;
     public String executeTxid;
 
-    public TxDataModel(BigInteger txid, MultiSigTx tx, String submitTxid, Boolean isConfirmed, BigInteger confirmCount, List<Address> confirmations) {
+    public TxDataModel(BigInteger txid, MultiSigTx tx, String submitTxid, Boolean isConfirmed, List<Address> confirmations) {
         this.txid = txid;
         this.from = tx.from;
         if (tx.to.getValue().equals(ProxyAdmin.contractAddr.getValue())) {
@@ -51,7 +51,7 @@ public class TxDataModel {
         this.executorName = CommonUtil.getOpertor(this.executor.getValue());
         this.executeDate = TimeUtil.toDate(this.timestamp.longValue());
         this.isConfirmed = isConfirmed;
-        this.confirmCount = confirmCount;
+        this.confirmCount = BigInteger.valueOf(confirmations.size());
         this.confirmations = confirmations;
         this.submitTxid = submitTxid;
     }

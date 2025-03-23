@@ -252,8 +252,8 @@ public class TxPage extends JPanel implements PropertyChangeListener {
             return;
         }
         txData.confirmations.add(owner);
-        txData.confirmCount = txData.confirmCount.add(BigInteger.ONE);
-        txData.isConfirmed = txData.confirmCount.intValue() >= required;
+        txData.confirmCount = BigInteger.valueOf(txData.confirmations.size());
+        txData.isConfirmed = txData.confirmations.size() >= required;
         if (!filteredData.isEmpty()) {
             filterTable();
         } else {
@@ -272,8 +272,8 @@ public class TxPage extends JPanel implements PropertyChangeListener {
             return;
         }
         txData.confirmations.remove(owner);
-        txData.confirmCount = txData.confirmCount.subtract(BigInteger.ONE);
-        txData.isConfirmed = txData.confirmCount.intValue() >= required;
+        txData.confirmCount = BigInteger.valueOf(txData.confirmations.size());
+        txData.isConfirmed = txData.confirmations.size() >= required;
         if (!filteredData.isEmpty()) {
             filterTable();
         } else {
@@ -287,11 +287,8 @@ public class TxPage extends JPanel implements PropertyChangeListener {
             return;
         }
         MultiSigTx tx = ContractModel.getInstance().getMultiSig().getTransaction(txid);
-        boolean isConfirmed = 1 >= required;
-        BigInteger confirmCount = BigInteger.ONE;
-        List<Address> confirmations = new ArrayList<>();
-        confirmations = ContractModel.getInstance().getMultiSig().getConfirmations(txid);
-        addNewData(new TxDataModel(txid, tx, submitTxid, isConfirmed, confirmCount, confirmations));
+        List<Address> confirmations = ContractModel.getInstance().getMultiSig().getConfirmations(txid);
+        addNewData(new TxDataModel(txid, tx, submitTxid, confirmations.size() >= required, confirmations));
         if (!filteredData.isEmpty()) {
             filterTable();
         } else {

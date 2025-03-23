@@ -26,8 +26,10 @@ public class TxDataModel {
     public Boolean isConfirmed;
     public BigInteger confirmCount;
     public List<Address> confirmations;
+    public String submitTxid;
+    public String executeTxid;
 
-    public TxDataModel(BigInteger txid, MultiSigTx tx, Boolean isConfirmed, BigInteger confirmCount, List<Address> confirmations) {
+    public TxDataModel(BigInteger txid, MultiSigTx tx, String submitTxid, Boolean isConfirmed, BigInteger confirmCount, List<Address> confirmations) {
         this.txid = txid;
         this.from = tx.from;
         if (tx.to.getValue().equals(ProxyAdmin.contractAddr.getValue())) {
@@ -51,6 +53,7 @@ public class TxDataModel {
         this.isConfirmed = isConfirmed;
         this.confirmCount = confirmCount;
         this.confirmations = confirmations;
+        this.submitTxid = submitTxid;
     }
 
     @Override

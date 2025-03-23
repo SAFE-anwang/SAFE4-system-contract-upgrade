@@ -223,10 +223,10 @@ public class TxPage extends JPanel implements PropertyChangeListener {
                             handleRevocation(new Address(log.getTopics().get(1)), Numeric.toBigInt(log.getTopics().get(2)));
                             break;
                         case "Submission":
-                            handleSubmission(Numeric.toBigInt(log.getTopics().get(1)));
+                            handleSubmission(Numeric.toBigInt(log.getTopics().get(1)), log.getTransactionHash());
                             break;
                         case "Execution":
-                            handleExecution(new Address(log.getTopics().get(1)), Numeric.toBigInt(log.getTopics().get(2)));
+                            handleExecution(new Address(log.getTopics().get(1)), Numeric.toBigInt(log.getTopics().get(2)), log.getTransactionHash());
                             break;
                         case "RequirementChange":
                             handleRequirementChange(Numeric.toBigInt(log.getTopics().get(1)));
@@ -282,7 +282,7 @@ public class TxPage extends JPanel implements PropertyChangeListener {
         tableModel.fireTableDataChanged();
     }
 
-    private void handleSubmission(BigInteger txid) throws Exception {
+    private void handleSubmission(BigInteger txid, String submitTxid) throws Exception {
         if (id2pos.containsKey(txid)) {
             return;
         }
@@ -291,7 +291,7 @@ public class TxPage extends JPanel implements PropertyChangeListener {
         BigInteger confirmCount = BigInteger.ONE;
         List<Address> confirmations = new ArrayList<>();
         confirmations = ContractModel.getInstance().getMultiSig().getConfirmations(txid);
-        addNewData(new TxDataModel(txid, tx, isConfirmed, confirmCount, confirmations));
+        addNewData(new TxDataModel(txid, tx, submitTxid, isConfirmed, confirmCount, confirmations));
         if (!filteredData.isEmpty()) {
             filterTable();
         } else {
@@ -300,7 +300,7 @@ public class TxPage extends JPanel implements PropertyChangeListener {
         tableModel.fireTableDataChanged();
     }
 
-    private void handleExecution(Address owner, BigInteger txid) {
+    private void handleExecution(Address owner, BigInteger txid, String executeTxid) {
         if (!id2pos.containsKey(txid)) {
             return;
         }
@@ -308,6 +308,7 @@ public class TxPage extends JPanel implements PropertyChangeListener {
         TxDataModel txData = data.get(pos);
         txData.executed = true;
         txData.executor = owner;
+        txData.executeTxid = executeTxid;
         if (!filteredData.isEmpty()) {
             filterTable();
         } else {

@@ -207,7 +207,7 @@ public class TxPage extends JPanel implements PropertyChangeListener {
         }));
         Event RequirementChangeEvent = new Event("RequirementChange", Collections.singletonList(new TypeReference<Uint256>() {
         }));
-        EthFilter eventFilter = new EthFilter(DefaultBlockParameter.valueOf(BigInteger.valueOf(187370)), DefaultBlockParameter.valueOf("latest"), MultiSig.contractAddr.getValue()).addOptionalTopics(
+        EthFilter eventFilter = new EthFilter(DefaultBlockParameter.valueOf(BigInteger.ZERO), DefaultBlockParameter.valueOf("latest"), MultiSig.contractAddr.getValue()).addOptionalTopics(
                 EventEncoder.encode(submissionEvent),
                 EventEncoder.encode(confirmationEvent),
                 EventEncoder.encode(revocationEvent),
@@ -223,7 +223,11 @@ public class TxPage extends JPanel implements PropertyChangeListener {
                             handleRevocation(new Address(log.getTopics().get(1)), Numeric.toBigInt(log.getTopics().get(2)));
                             break;
                         case "Submission":
-                            handleSubmission(Numeric.toBigInt(log.getTopics().get(1)), log.getTransactionHash());
+                            if(log.getTopics().size() > 2) {
+                                handleSubmission(new Address(log.getTopics().get(1)), Numeric.toBigInt(log.getTopics().get(1)), log.getTransactionHash());
+                            } else {
+                                handleSubmission(new Address(log.getData()), Numeric.toBigInt(log.getTopics().get(1)), log.getTransactionHash());
+                            }
                             break;
                         case "Execution":
                             handleExecution(new Address(log.getTopics().get(1)), Numeric.toBigInt(log.getTopics().get(2)), log.getTransactionHash());
@@ -280,12 +284,13 @@ public class TxPage extends JPanel implements PropertyChangeListener {
         tableModel.fireTableDataChanged();
     }
 
-    private void handleSubmission(BigInteger txid, String submitTxid) throws Exception {
+    private void handleSubmission(Address owner, BigInteger txid, String submitTxid) throws Exception {
         if (id2pos.containsKey(txid)) {
             return;
         }
         MultiSigTx tx = ContractModel.getInstance().getMultiSig().getTransaction(txid);
-        List<Address> confirmations = ContractModel.getInstance().getMultiSig().getConfirmations(txid);
+        List<Address> confirmations = new ArrayList<>();
+        confirmations.add(owner);
         addNewData(new TxDataModel(txid, tx, submitTxid, confirmations.size() >= required, confirmations));
         if (!filteredData.isEmpty()) {
             filterTable();

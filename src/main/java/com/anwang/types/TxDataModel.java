@@ -24,7 +24,6 @@ public class TxDataModel {
     public String executorName;
     public String executeDate;
     public Boolean isConfirmed;
-    public BigInteger confirmCount;
     public List<Address> confirmations;
     public String submitTxid;
     public String executeTxid;
@@ -51,7 +50,6 @@ public class TxDataModel {
         this.executorName = CommonUtil.getOpertor(this.executor.getValue());
         this.executeDate = TimeUtil.toDate(this.timestamp.longValue());
         this.isConfirmed = isConfirmed;
-        this.confirmCount = BigInteger.valueOf(confirmations.size());
         this.confirmations = confirmations;
         this.submitTxid = submitTxid;
     }
@@ -71,8 +69,9 @@ public class TxDataModel {
                 ", toName=" + toName +
                 ", executorName=" + executorName +
                 ", executeDate=" + executeDate +
-                ", isConfirmed=" + isConfirmed +
-                ", confirmCount=" + confirmCount +
+                ", confirmations=" + confirmations +
+                ", submitTxid=" + submitTxid +
+                ", executeTxid=" + executeTxid +
                 '}';
     }
 }

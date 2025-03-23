@@ -73,7 +73,7 @@ public class TxDataInfoDialog {
 
         components.clear();
         components.add(new JLabel("确认数:"));
-        components.add(new JLabel(txData.confirmCount.toString()));
+        components.add(new JLabel(String.valueOf(txData.confirmations.size())));
         panel.addRow(components, 8);
 
         components.clear();

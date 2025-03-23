@@ -252,7 +252,6 @@ public class TxPage extends JPanel implements PropertyChangeListener {
             return;
         }
         txData.confirmations.add(owner);
-        txData.confirmCount = BigInteger.valueOf(txData.confirmations.size());
         txData.isConfirmed = txData.confirmations.size() >= required;
         if (!filteredData.isEmpty()) {
             filterTable();
@@ -272,7 +271,6 @@ public class TxPage extends JPanel implements PropertyChangeListener {
             return;
         }
         txData.confirmations.remove(owner);
-        txData.confirmCount = BigInteger.valueOf(txData.confirmations.size());
         txData.isConfirmed = txData.confirmations.size() >= required;
         if (!filteredData.isEmpty()) {
             filterTable();

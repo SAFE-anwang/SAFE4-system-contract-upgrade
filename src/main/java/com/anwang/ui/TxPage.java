@@ -41,7 +41,7 @@ public class TxPage extends JPanel implements PropertyChangeListener {
     private final JTextField filterField;
     private final JLabel pageInfoLabel;
     private int currentPage = 1;
-    private final int pageSize = 5;
+    private final int pageSize = 10;
     private final List<TxDataModel> data = new ArrayList<>();
     private final Map<BigInteger, Integer> id2pos = new HashMap<>();
     private final List<TxDataModel> filteredData = new ArrayList<>();

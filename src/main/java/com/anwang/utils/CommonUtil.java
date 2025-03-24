@@ -1,6 +1,5 @@
 package com.anwang.utils;
 
-import com.anwang.contracts.ProxyAdmin;
 import org.web3j.abi.datatypes.Address;
 import org.web3j.crypto.Hash;
 import org.web3j.utils.Numeric;

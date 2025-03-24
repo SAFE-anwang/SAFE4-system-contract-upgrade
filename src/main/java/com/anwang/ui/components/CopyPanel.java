@@ -8,7 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.net.URL;
+import java.util.Objects;
 
 public class CopyPanel extends JPanel {
 
@@ -19,12 +19,7 @@ public class CopyPanel extends JPanel {
         ;
 
         if (copyIcon == null) {
-            URL imageUrl = getClass().getClassLoader().getResource("images/copy.png");
-            if (imageUrl != null) {
-                copyIcon = new ImageIcon(imageUrl);
-            } else {
-                throw new RuntimeException("Not found: copy.png");
-            }
+            copyIcon = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("images/copy.png")));
         }
 
         JLabel textLabel = new JLabel(text);
@@ -41,7 +36,7 @@ public class CopyPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 StringSelection stringSelection = new StringSelection(text);
-                if(text.contains("(")) {
+                if (text.contains("(")) {
                     stringSelection = new StringSelection(text.substring(text.indexOf('(') + 1, text.indexOf(')')));
                 }
                 Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();

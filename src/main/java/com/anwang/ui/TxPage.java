@@ -223,7 +223,7 @@ public class TxPage extends JPanel implements PropertyChangeListener {
                             handleRevocation(new Address(log.getTopics().get(1)), Numeric.toBigInt(log.getTopics().get(2)));
                             break;
                         case "Submission":
-                            if(log.getTopics().size() > 2) {
+                            if (log.getTopics().size() > 2) {
                                 handleSubmission(new Address(log.getTopics().get(1)), Numeric.toBigInt(log.getTopics().get(1)), log.getTransactionHash());
                             } else {
                                 handleSubmission(new Address(log.getData()), Numeric.toBigInt(log.getTopics().get(1)), log.getTransactionHash());

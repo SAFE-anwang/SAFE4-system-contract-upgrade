@@ -12,7 +12,7 @@ public class App extends JFrame implements PropertyChangeListener {
     public static App app;
 
     public App() {
-        setTitle("多签工具 ———— " + ContractModel.getInstance().getChainType());
+        setTitle("多签工具 v1.0.1 ———— " + ContractModel.getInstance().getChainType());
         setMinimumSize(new Dimension(1000, 600));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -35,7 +35,7 @@ public class App extends JFrame implements PropertyChangeListener {
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         if ("chainId".equals(evt.getPropertyName())) {
-            setTitle("多签工具 ———— " + ContractModel.getInstance().getChainType());
+            setTitle("多签工具 v1.0.1 ———— " + ContractModel.getInstance().getChainType());
         }
     }
 

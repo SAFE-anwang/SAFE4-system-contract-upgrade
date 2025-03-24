@@ -15,39 +15,41 @@ public class TxDataInfoDialog {
     public static void show(TxDataModel txData) {
         CustomPanel panel = new CustomPanel();
         List<JComponent> components = new ArrayList<>();
+
+        int index = 0;
         components.add(new JLabel("序号："));
         components.add(new JLabel(txData.txid.toString()));
-        panel.addRow(components, 0);
+        panel.addRow(components, index++);
 
         components.clear();
         components.add(new JLabel("发起交易Hash："));
-        components.add(new JLabel(txData.submitTxid));
-        panel.addRow(components, 1);
+        components.add(new CopyPanel(txData.submitTxid));
+        panel.addRow(components, index++);
 
         components.clear();
         components.add(new JLabel("发起者："));
-        components.add(new JLabel(txData.fromName + " (" + txData.from.getValue() + ")"));
-        panel.addRow(components, 2);
+        components.add(new CopyPanel(txData.fromName + " (" + txData.from.getValue() + ")"));
+        panel.addRow(components, index++);
 
         components.clear();
         components.add(new JLabel("目标合约："));
-        components.add(new JLabel(txData.toName + " (" + txData.to.getValue() + ")"));
-        panel.addRow(components, 3);
+        components.add(new CopyPanel(txData.toName + " (" + txData.to.getValue() + ")"));
+        panel.addRow(components, index++);
 
         components.clear();
         components.add(new JLabel("使用金额："));
         components.add(new JLabel(txData.value.toString()));
-        panel.addRow(components, 4);
+        panel.addRow(components, index++);
 
         components.clear();
         components.add(new JLabel("功能："));
         components.add(new JLabel(txData.function));
-        panel.addRow(components, 5);
+        panel.addRow(components, index++);
 
         components.clear();
         components.add(new JLabel("计划执行时间："));
         components.add(new JLabel(txData.executeDate));
-        panel.addRow(components, 6);
+        panel.addRow(components, index++);
 
         components.clear();
         components.add(new JLabel("当前状态："));
@@ -68,37 +70,37 @@ public class TxDataInfoDialog {
             }
         }
         components.add(new JLabel(status));
-        panel.addRow(components, 7);
-
+        panel.addRow(components, index++);
 
         components.clear();
         components.add(new JLabel("确认数:"));
         components.add(new JLabel(String.valueOf(txData.confirmations.size())));
-        panel.addRow(components, 8);
+        panel.addRow(components, index++);
 
-        components.clear();
-        components.add(new JLabel("确认者："));
-        String text = "<html>";
         for (int i = 0; i < txData.confirmations.size(); i++) {
-            text += CommonUtil.getOpertor(txData.confirmations.get(i).getValue()) + " (" + txData.confirmations.get(i).getValue() + ")<br>";
+            components.clear();
+            if (i == 0) {
+                components.add(new JLabel("确认者："));
+            } else {
+                components.add(new JLabel(""));
+            }
+            components.add(new CopyPanel(CommonUtil.getOpertor(txData.confirmations.get(i).getValue()) + " (" + txData.confirmations.get(i).getValue() + ")"));
+            panel.addRow(components, index++);
         }
-        text += "</html>";
-        components.add(new JLabel(text));
-        panel.addRow(components, 9);
 
         components.clear();
         components.add(new JLabel("执行交易Hash："));
-        components.add(new JLabel(txData.executeTxid));
-        panel.addRow(components, 10);
+        components.add(new CopyPanel(txData.executeTxid));
+        panel.addRow(components, index++);
 
         components.clear();
         components.add(new JLabel("执行者："));
         if (!Objects.equals(txData.executor, new Address(BigInteger.valueOf(0)))) {
-            components.add(new JLabel(txData.executorName + " (" + txData.executor.getValue() + ")"));
+            components.add(new CopyPanel(txData.executorName + " (" + txData.executor.getValue() + ")"));
         } else {
             components.add(new JLabel(txData.executorName));
         }
-        panel.addRow(components, 11);
+        panel.addRow(components, index++);
 
         JOptionPane.showConfirmDialog(
                 null,

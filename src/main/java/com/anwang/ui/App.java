@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.util.Objects;
 
 public class App extends JFrame implements PropertyChangeListener {
 
@@ -15,6 +16,8 @@ public class App extends JFrame implements PropertyChangeListener {
         setTitle("多签工具 v1.0.1 ———— " + ContractModel.getInstance().getChainType());
         setMinimumSize(new Dimension(1000, 600));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        ImageIcon imageIcon = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource("images/safe.png")));
+        setIconImage(imageIcon.getImage());
         setLocationRelativeTo(null);
 
         // 主布局：左侧菜单栏 + 右侧内容

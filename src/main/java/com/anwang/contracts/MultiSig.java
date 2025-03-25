@@ -196,4 +196,10 @@ public class MultiSig {
         byte[] data = Numeric.hexStringToByteArray(FunctionEncoder.encode(function));
         return submitTransaction(privateKey, CommonUtil.getProxy("SuperNodeLogic"), BigInteger.ZERO, data, timestamp);
     }
+
+    public String transferOwnership(String privateKey, String contractName, String owner, long timestamp) throws Exception {
+        Function function = new Function("transferOwnership", Collections.singletonList(new Address(owner)), Collections.emptyList());
+        byte[] data = Numeric.hexStringToByteArray(FunctionEncoder.encode(function));
+        return submitTransaction(privateKey, CommonUtil.getProxy(contractName), BigInteger.ZERO, data, timestamp);
+    }
 }

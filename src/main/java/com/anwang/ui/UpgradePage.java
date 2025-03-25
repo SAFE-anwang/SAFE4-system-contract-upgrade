@@ -30,7 +30,8 @@ public class UpgradePage extends JPanel {
                 {"提案合约", "Proposal", ""},
                 {"系统奖励合约", "SystemReward", ""},
                 {"Safe3迁移合约", "Safe3", ""},
-                {"多签延时合约", "MultiSigWallet", ""}
+                {"多签延时合约", "MultiSigWallet", ""},
+                {"ProxyAdmin合约", "ProxyAdmin", ""}
         };
         DefaultTableModel model = new DefaultTableModel(data, columnName) {
             @Override
@@ -57,6 +58,7 @@ public class UpgradePage extends JPanel {
         private final JButton removeOwnerButton;
         private final JButton replaceOwnerButton;
         private final JButton changeRequirementButton;
+        private final JButton transferOwnershipButton;
 
         public ButtonRenderer() {
             setOpaque(false);
@@ -68,6 +70,7 @@ public class UpgradePage extends JPanel {
             removeOwnerButton = new JButton("移除管理员");
             replaceOwnerButton = new JButton("替换管理员");
             changeRequirementButton = new JButton("更改签名数");
+            transferOwnershipButton = new JButton("更换合约所有者");
         }
 
         @Override
@@ -81,6 +84,7 @@ public class UpgradePage extends JPanel {
                 if (row == 3 || row == 5) {
                     add(changeIsOfficialButton);
                 }
+                add(transferOwnershipButton);
             } else {
                 add(addOwnerButton);
                 add(removeOwnerButton);
@@ -99,6 +103,7 @@ public class UpgradePage extends JPanel {
         private final JButton removeOwnerButton;
         private final JButton replaceOwnerButton;
         private final JButton changeRequirementButton;
+        private final JButton transferOwnershipButton;
         private final JPanel panel;
         private JTable table;
 
@@ -112,6 +117,7 @@ public class UpgradePage extends JPanel {
             removeOwnerButton = new JButton("移除管理员");
             replaceOwnerButton = new JButton("替换管理员");
             changeRequirementButton = new JButton("更改签名数");
+            transferOwnershipButton = new JButton("更换合约所有者");
 
             upgradeButton.addActionListener(new ActionListener() {
                 @Override
@@ -161,6 +167,13 @@ public class UpgradePage extends JPanel {
                     ChangeRequirementDialog.show();
                 }
             });
+
+            transferOwnershipButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    TransferOwnershipDialog.show(table.getValueAt(table.getSelectedRow(), 1).toString());
+                }
+            });
         }
 
         @Override
@@ -175,6 +188,7 @@ public class UpgradePage extends JPanel {
                 if (row == 3 || row == 5) {
                     panel.add(changeIsOfficialButton);
                 }
+                panel.add(transferOwnershipButton);
             } else {
                 panel.add(addOwnerButton);
                 panel.add(removeOwnerButton);

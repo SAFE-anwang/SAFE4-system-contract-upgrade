@@ -1,5 +1,6 @@
 package com.anwang.utils;
 
+import com.anwang.contracts.ProxyAdmin;
 import org.web3j.abi.datatypes.Address;
 import org.web3j.crypto.Hash;
 import org.web3j.utils.Numeric;
@@ -44,6 +45,8 @@ public class CommonUtil {
 
     public static Address getProxy(String contractName) throws Exception {
         switch (contractName) {
+            case "ProxyAdmin":
+                return ProxyAdmin.contractAddr;
             case "Property":
                 return new Address("0x0000000000000000000000000000000000001000");
             case "AccountManager":
@@ -75,6 +78,8 @@ public class CommonUtil {
 
     public static String getContractName(String contractAddr) {
         switch (contractAddr) {
+            case "0x0000000000000000000000000000000000000999":
+                return "ProxyAdmin合约";
             case "0x0000000000000000000000000000000000001000":
                 return "系统参数合约";
             case "0x0000000000000000000000000000000000001010":

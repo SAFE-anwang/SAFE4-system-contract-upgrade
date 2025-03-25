@@ -16,6 +16,7 @@ public class StartupPage {
     public StartupPage() {
         dialog = new JDialog((JFrame) null, "选择网络", true);
         dialog.setLayout(new BorderLayout());
+        dialog.getRootPane().registerKeyboardAction(e -> dialog.dispose(), KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_IN_FOCUSED_WINDOW);
         closeType = 0;
     }
 
@@ -89,7 +90,6 @@ public class StartupPage {
         exitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                closeType = 2;
                 dialog.dispose();
             }
         });
@@ -100,11 +100,5 @@ public class StartupPage {
         dialog.setResizable(false);
         dialog.setLocationRelativeTo(App.app);
         dialog.setVisible(true);
-        dialog.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosed(WindowEvent e) {
-                closeType = 2;
-            }
-        });
     }
 }

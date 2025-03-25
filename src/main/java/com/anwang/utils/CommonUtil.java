@@ -149,7 +149,7 @@ public class CommonUtil {
         System.arraycopy(hash, 0, selector, 0, 4);
         String changeRequirementHex = Numeric.toHexString(selector);
 
-        functionSignature = "transferOwnership(Address)";
+        functionSignature = "transferOwnership(address)";
         hash = Hash.sha3(functionSignature.getBytes());
         selector = new byte[4];
         System.arraycopy(hash, 0, selector, 0, 4);

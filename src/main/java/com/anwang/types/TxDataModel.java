@@ -31,19 +31,23 @@ public class TxDataModel {
     public TxDataModel(BigInteger txid, MultiSigTx tx, String submitTxid, Boolean isConfirmed, List<Address> confirmations) {
         this.txid = txid;
         this.from = tx.from;
-        if (tx.to.getValue().equals(ProxyAdmin.contractAddr.getValue())) {
-            byte[] temp = new byte[20];
-            System.arraycopy(tx.data, 16, temp, 0, 20);
-            String to = Numeric.toHexString(temp);
-            this.to = new Address(to);
-        } else {
-            this.to = tx.to;
-        }
         this.value = tx.value;
         this.function = CommonUtil.getFunctionName(tx.data);
         this.timestamp = tx.timestamp;
         this.executor = tx.executor;
         this.executed = tx.executed;
+        if (!tx.to.equals(ProxyAdmin.contractAddr)) {
+            this.to = tx.to;
+        } else {
+            if (this.function.equals("升级")) {
+                byte[] temp = new byte[20];
+                System.arraycopy(tx.data, 16, temp, 0, 20);
+                String to = Numeric.toHexString(temp);
+                this.to = new Address(to);
+            } else {
+                this.to = tx.to;
+            }
+        }
 
         this.fromName = CommonUtil.getOpertor(this.from.getValue());
         this.toName = CommonUtil.getContractName(this.to.getValue());

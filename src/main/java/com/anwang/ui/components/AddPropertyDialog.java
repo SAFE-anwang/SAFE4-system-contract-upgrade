@@ -96,15 +96,15 @@ public class AddPropertyDialog {
                         value == null || value.trim().isEmpty() ||
                         description == null || description.trim().isEmpty() ||
                         dateTime == null) {
-                    JOptionPane.showMessageDialog(null, "请输入相关信息");
+                    JOptionPane.showMessageDialog(dialog, "请输入相关信息");
                     return;
                 }
                 try {
                     String ret = ContractModel.getInstance().getMultiSig().addProperty(key.trim(), name.trim(), new BigInteger(value.trim()), description.trim(), TimeUtil.toTimestamp(dateTime));
-                    JOptionPane.showMessageDialog(null, "提交'新增参数'成功，返回交易：" + ret);
+                    JOptionPane.showMessageDialog(dialog, "提交'新增参数'成功，返回交易：" + ret);
                     dialog.dispose();
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, "提交'新增参数'失败，" + ex.getMessage());
+                    JOptionPane.showMessageDialog(dialog, "提交'新增参数'失败，" + ex.getMessage());
                 }
             }
         });

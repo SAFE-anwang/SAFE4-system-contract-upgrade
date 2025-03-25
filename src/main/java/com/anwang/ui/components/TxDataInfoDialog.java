@@ -1,6 +1,7 @@
 package com.anwang.ui.components;
 
 import com.anwang.types.TxDataModel;
+import com.anwang.ui.App;
 import com.anwang.utils.CommonUtil;
 import com.anwang.utils.TimeUtil;
 import org.web3j.abi.datatypes.Address;
@@ -103,7 +104,7 @@ public class TxDataInfoDialog {
         panel.addRow(components, index++);
 
         JOptionPane.showConfirmDialog(
-                null,
+                App.app,
                 panel,
                 "升级",
                 JOptionPane.DEFAULT_OPTION,

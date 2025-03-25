@@ -28,14 +28,14 @@ public class SettingPage extends JPanel {
                 long chainId = netTypeComboBox.getSelectedIndex() == 0 ? 6666666 : 6666665;
                 String url = rpcFiled.getText();
                 if (url == null || url.trim().isEmpty()) {
-                    JOptionPane.showMessageDialog(null, "请输入相关信息");
+                    JOptionPane.showMessageDialog(App.app, "请输入相关信息");
                     return;
                 }
                 String ret = ContractModel.getInstance().update(chainId, url);
                 if (ret == null) {
-                    JOptionPane.showMessageDialog(null, "当前已切换到 " + ContractModel.getInstance().getChainType() + "中");
+                    JOptionPane.showMessageDialog(App.app, "当前已切换到 " + ContractModel.getInstance().getChainType() + "中");
                 } else {
-                    JOptionPane.showMessageDialog(null, ret);
+                    JOptionPane.showMessageDialog(App.app, ret);
                 }
             }
         });

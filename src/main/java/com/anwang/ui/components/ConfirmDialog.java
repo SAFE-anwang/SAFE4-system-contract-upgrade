@@ -42,15 +42,15 @@ public class ConfirmDialog {
             public void actionPerformed(ActionEvent e) {
                 String key = keyFiled.getText();
                 if (key == null || key.trim().isEmpty()) {
-                    JOptionPane.showMessageDialog(null, "请输入相关信息");
+                    JOptionPane.showMessageDialog(dialog, "请输入相关信息");
                     return;
                 }
                 try {
                     String ret = ContractModel.getInstance().getMultiSig().confirmTransaction(key.trim(), txid);
-                    JOptionPane.showMessageDialog(null, "确认成功，返回交易：" + ret);
+                    JOptionPane.showMessageDialog(dialog, "确认成功，返回交易：" + ret);
                     dialog.dispose();
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, "确认失败，" + ex.getMessage());
+                    JOptionPane.showMessageDialog(dialog, "确认失败，" + ex.getMessage());
                 }
             }
         });

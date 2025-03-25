@@ -42,14 +42,14 @@ public class RevokeDialog {
             public void actionPerformed(ActionEvent e) {
                 String key = keyFiled.getText();
                 if (key == null || key.trim().isEmpty()) {
-                    JOptionPane.showMessageDialog(null, "请输入相关信息");
+                    JOptionPane.showMessageDialog(dialog, "请输入相关信息");
                     return;
                 }
                 try {
                     String ret = ContractModel.getInstance().getMultiSig().revokeConfirmation(key.trim(), txid);
-                    JOptionPane.showMessageDialog(null, "撤销成功，返回交易：" + ret);
+                    JOptionPane.showMessageDialog(dialog, "撤销成功，返回交易：" + ret);
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, "撤销失败，" + ex.getMessage());
+                    JOptionPane.showMessageDialog(dialog, "撤销失败，" + ex.getMessage());
                 }
             }
         });

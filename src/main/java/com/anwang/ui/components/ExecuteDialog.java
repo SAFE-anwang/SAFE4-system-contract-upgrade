@@ -42,15 +42,15 @@ public class ExecuteDialog {
             public void actionPerformed(ActionEvent e) {
                 String key = keyFiled.getText();
                 if (key == null || key.trim().isEmpty()) {
-                    JOptionPane.showMessageDialog(null, "请输入相关信息");
+                    JOptionPane.showMessageDialog(dialog, "请输入相关信息");
                     return;
                 }
                 try {
                     String ret = ContractModel.getInstance().getMultiSig().executeTransaction(key.trim(), txid);
-                    JOptionPane.showMessageDialog(null, "执行成功，返回交易：" + ret);
+                    JOptionPane.showMessageDialog(dialog, "执行成功，返回交易：" + ret);
                     dialog.dispose();
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, "执行失败，" + ex.getMessage());
+                    JOptionPane.showMessageDialog(dialog, "执行失败，" + ex.getMessage());
                 }
             }
         });

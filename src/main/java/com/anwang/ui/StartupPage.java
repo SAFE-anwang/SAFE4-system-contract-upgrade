@@ -73,7 +73,7 @@ public class StartupPage {
                 long chainId = netTypeComboBox.getSelectedIndex() == 0 ? 6666666 : 6666665;
                 String url = rpcFiled.getText();
                 if (url == null || url.trim().isEmpty()) {
-                    JOptionPane.showMessageDialog(null, "请输入相关信息");
+                    JOptionPane.showMessageDialog(dialog, "请输入相关信息");
                     return;
                 }
                 String ret = ContractModel.getInstance().init(chainId, url.trim());
@@ -81,7 +81,7 @@ public class StartupPage {
                     closeType = 1;
                     dialog.dispose();
                 } else {
-                    JOptionPane.showMessageDialog(null, ret);
+                    JOptionPane.showMessageDialog(dialog, ret);
                 }
             }
         });

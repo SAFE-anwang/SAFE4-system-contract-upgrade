@@ -67,15 +67,15 @@ public class ChangeRequirementDialog {
                 if (key == null || key.trim().isEmpty() ||
                         requirement == null || requirement.trim().isEmpty() ||
                         dateTime == null) {
-                    JOptionPane.showMessageDialog(null, "请输入相关信息");
+                    JOptionPane.showMessageDialog(dialog, "请输入相关信息");
                     return;
                 }
                 try {
                     String ret = ContractModel.getInstance().getMultiSig().changeRequirement(key.trim(), new BigInteger(requirement.trim()).longValue(), TimeUtil.toTimestamp(dateTime));
-                    JOptionPane.showMessageDialog(null, "提交'更改签名数'成功，返回交易：" + ret);
+                    JOptionPane.showMessageDialog(dialog, "提交'更改签名数'成功，返回交易：" + ret);
                     dialog.dispose();
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, "提交'更改签名数'失败，" + ex.getMessage());
+                    JOptionPane.showMessageDialog(dialog, "提交'更改签名数'失败，" + ex.getMessage());
                 }
             }
         });

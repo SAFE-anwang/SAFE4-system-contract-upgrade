@@ -70,27 +70,27 @@ public class UpgradeDialog {
                 if (key == null || key.trim().isEmpty() ||
                         bytecode == null || bytecode.trim().isEmpty() ||
                         dateTime == null) {
-                    JOptionPane.showMessageDialog(null, "请输入相关信息");
+                    JOptionPane.showMessageDialog(dialog, "请输入相关信息");
                     return;
                 }
 //            try {
 //                CommonUtil.compile(contractName);
 //            } catch (Exception ex) {
-//                JOptionPane.showMessageDialog(null, "升级/编译失败，" + ex.getMessage());
+//                JOptionPane.showMessageDialog(dialog, "升级/编译失败，" + ex.getMessage());
 //                return;
 //            }
 //            try {
 //                String ret = ContractModel.getInstance().getMultiSig().upgradeContract(key.trim(), contractName, TimeUtil.toTimestamp(dateTime));
-//                JOptionPane.showMessageDialog(null, "提交'合约升级'成功，返回交易：" + ret);
+//                JOptionPane.showMessageDialog(dialog, "提交'合约升级'成功，返回交易：" + ret);
 //            } catch (Exception ex) {
-//                JOptionPane.showMessageDialog(null, "提交'合约升级'失败，" + ex.getMessage());
+//                JOptionPane.showMessageDialog(dialog, "提交'合约升级'失败，" + ex.getMessage());
 //            }
                 try {
                     String ret = ContractModel.getInstance().getMultiSig().upgradeContract(key.trim(), contractName, bytecode.trim(), TimeUtil.toTimestamp(dateTime));
-                    JOptionPane.showMessageDialog(null, "提交'合约升级'成功，返回交易：" + ret);
+                    JOptionPane.showMessageDialog(dialog, "提交'合约升级'成功，返回交易：" + ret);
                     dialog.dispose();
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, "提交'合约升级'失败，" + ex.getMessage());
+                    JOptionPane.showMessageDialog(dialog, "提交'合约升级'失败，" + ex.getMessage());
                 }
             }
         });

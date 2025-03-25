@@ -86,7 +86,7 @@ public class ChangeIsOfficialDialog {
                 if (key == null || key.trim().isEmpty() ||
                         addr == null || addr.trim().isEmpty() ||
                         dateTime == null) {
-                    JOptionPane.showMessageDialog(null, "请输入相关信息");
+                    JOptionPane.showMessageDialog(dialog, "请输入相关信息");
                     return;
                 }
                 try {
@@ -96,10 +96,10 @@ public class ChangeIsOfficialDialog {
                     } else {
                         ret = ContractModel.getInstance().getMultiSig().changeIsOfficial4SN(key, addr, flag, TimeUtil.toTimestamp(dateTime));
                     }
-                    JOptionPane.showMessageDialog(null, "提交'配置官方" + nodeType + "'成功，返回交易：" + ret);
+                    JOptionPane.showMessageDialog(dialog, "提交'配置官方" + nodeType + "'成功，返回交易：" + ret);
                     dialog.dispose();
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, "提交'配置官方" + nodeType + "'失败，" + ex.getMessage());
+                    JOptionPane.showMessageDialog(dialog, "提交'配置官方" + nodeType + "'失败，" + ex.getMessage());
                 }
             }
         });

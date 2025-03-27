@@ -308,6 +308,7 @@ public class TxPage extends JPanel implements PropertyChangeListener {
         TxDataModel txData = data.get(pos);
         txData.executed = true;
         txData.executor = owner;
+        txData.executorName = CommonUtil.getOpertor(owner.getValue());
         txData.executeTxid = executeTxid;
         if (!filteredData.isEmpty()) {
             filterTable();

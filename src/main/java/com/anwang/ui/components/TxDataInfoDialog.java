@@ -7,10 +7,8 @@ import com.anwang.utils.TimeUtil;
 import org.web3j.abi.datatypes.Address;
 
 import javax.swing.*;
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class TxDataInfoDialog {
     public static void show(TxDataModel txData) {
@@ -96,7 +94,7 @@ public class TxDataInfoDialog {
 
         components.clear();
         components.add(new JLabel("执行者："));
-        if (!Objects.equals(txData.executor, new Address(BigInteger.valueOf(0)))) {
+        if (!txData.executor.equals(Address.DEFAULT)) {
             components.add(new CopyPanel(txData.executorName + " (" + txData.executor.getValue() + ")"));
         } else {
             components.add(new JLabel(txData.executorName));

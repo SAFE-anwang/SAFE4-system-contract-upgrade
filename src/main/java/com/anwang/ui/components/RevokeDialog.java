@@ -50,6 +50,7 @@ public class RevokeDialog {
                 try {
                     String ret = ContractModel.getInstance().getMultiSig().revokeConfirmation(key.trim(), txid);
                     JOptionPane.showMessageDialog(dialog, "撤销成功，返回交易：" + ret);
+                    dialog.dispose();
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(dialog, "撤销失败，" + ex.getMessage());
                 }

@@ -84,6 +84,7 @@ public class ReplaceOwnerDialog {
                 try {
                     String ret = ContractModel.getInstance().getMultiSig().replaceOwner(key.trim(), oldOwner.trim(), newOwner.trim(), TimeUtil.toTimestamp(dateTime));
                     JOptionPane.showMessageDialog(dialog, "提交'替换管理员'成功，返回交易：" + ret);
+                    dialog.dispose();
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(dialog, "提交'替换管理员'失败，" + ex.getMessage());
                 }

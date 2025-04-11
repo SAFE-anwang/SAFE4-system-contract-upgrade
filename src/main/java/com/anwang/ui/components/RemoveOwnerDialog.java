@@ -73,6 +73,7 @@ public class RemoveOwnerDialog {
                 try {
                     String ret = ContractModel.getInstance().getMultiSig().removeOwner(key.trim(), owner.trim(), TimeUtil.toTimestamp(dateTime));
                     JOptionPane.showMessageDialog(dialog, "提交'移除管理员'成功，返回交易：" + ret);
+                    dialog.dispose();
                 } catch (Exception ex) {
                     JOptionPane.showMessageDialog(dialog, "提交'移除管理员'失败，" + ex.getMessage());
                 }

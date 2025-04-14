@@ -104,7 +104,7 @@ public class CommonUtil {
                 return "系统奖励合约";
             case "0x0000000000000000000000000000000000001090":
                 return "Safe3迁移合约";
-            case "0x62b31F0eCFF7e26786593118eC25DAD8C9BCB161":
+            case "0x190FAc606daA4d28d4a7B4d5B3aaD348bD5Aa25C":
             case "0x0000000000000000000000000000000000001102":
                 return "多签合约";
             default:

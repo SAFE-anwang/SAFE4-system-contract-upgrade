@@ -167,8 +167,6 @@ public class TxPage extends JPanel implements PropertyChangeListener {
                             updateTable();
                         }
                         tableModel.fireTableDataChanged();
-                        table.repaint();
-                        break;
                     }
                 }
             }

@@ -51,7 +51,7 @@ public class ContractModel {
         this.url = url;
         this.web3j = newWeb3j;
         if (chainId == 6666666) {
-            MultiSig.contractAddr = new Address("0x190FAc606daA4d28d4a7B4d5B3aaD348bD5Aa25C");
+            MultiSig.contractAddr = new Address("0x2Ced5C6c175e7216faE9EbD7624d43DfF36eCeEA");
         } else {
             MultiSig.contractAddr = new Address("0x0000000000000000000000000000000000001102");
         }

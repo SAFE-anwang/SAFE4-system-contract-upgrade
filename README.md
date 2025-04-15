@@ -3,18 +3,12 @@ Auto-upgrade safe4 system contracts, just for windows
 
 Runtime: `JDK1.8`
 
-Run `com.anwang.MainnetUpgrade` for auto-upgrade system-contract of `SAFE4-mainnet`
-
-Run `com.anwang.TestnetUpgrade` for auto-upgrade system-contract of `SAFE4-testnet`
-
 Allow auto-upgrade `Property AccountManager MasterNodeStorage MasterNodeLogic SuperNodeStorage SuperNodeLogic SNVote MasterNodeState SuperNodeState Proposal SystemReward Safe3` contract
 
-Parameters must be contract name above, can be one contract, also can be multiple contract names(split by space), for example:
+Allow change official MasterNodes and SuperNodes
 
-`MainnetUpgrade.exe Property`
+Allow update owners for Multi-sig-wallet contract
 
-or
+Allow call `transferOwnership` for `Property AccountManager MasterNodeStorage MasterNodeLogic SuperNodeStorage SuperNodeLogic SNVote MasterNodeState SuperNodeState Proposal SystemReward Safe3 ProxyAdmin` contract
 
-`MainnetUpgrade.exe Property AccountManager Safe3`
-
-Please change owner private key before upgrade contract. ownerKey is writed in main of MainnetUpgrade.java & TestnetUpgrade.java.
+Caller must be one of owners in Multi-sig-wallet

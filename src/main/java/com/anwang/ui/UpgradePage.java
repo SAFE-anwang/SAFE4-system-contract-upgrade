@@ -181,8 +181,14 @@ public class UpgradePage extends JPanel {
         @Override
         public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
             panel.removeAll();
-
-            if (row != 12) {
+            if (row == 12) {
+                panel.add(addOwnerButton);
+                panel.add(removeOwnerButton);
+                panel.add(replaceOwnerButton);
+                panel.add(changeRequirementButton);
+            } else if (row == 13) {
+                panel.add(transferOwnershipButton);
+            } else {
                 panel.add(upgradeButton);
                 if (row == 0) {
                     panel.add(addPropertyButton);
@@ -191,13 +197,7 @@ public class UpgradePage extends JPanel {
                     panel.add(changeIsOfficialButton);
                 }
                 panel.add(transferOwnershipButton);
-            } else {
-                panel.add(addOwnerButton);
-                panel.add(removeOwnerButton);
-                panel.add(replaceOwnerButton);
-                panel.add(changeRequirementButton);
             }
-
             this.table = table;
             return panel;
         }

@@ -16,10 +16,11 @@ public class SettingPage extends JPanel {
         JComboBox<String> netTypeComboBox = new JComboBox<>();
         netTypeComboBox.addItem("测试网");
         netTypeComboBox.addItem("主网");
+        netTypeComboBox.setSelectedItem(ContractModel.getInstance().getChainType());
 
         JLabel rpcLabel = new JLabel("Http Endpoint：");
         JTextField rpcFiled = new JTextField(30);
-        rpcFiled.setText("http://139.162.40.90:8545");
+        rpcFiled.setText(ContractModel.getInstance().getUrl());
 
         JButton confirmButton = new JButton("更新");
         confirmButton.addActionListener(new ActionListener() {

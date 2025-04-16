@@ -3,6 +3,7 @@ package com.anwang.ui.components;
 import com.anwang.types.ContractModel;
 import com.anwang.ui.App;
 import com.anwang.ui.components.filters.HexnumericFilter;
+import com.anwang.utils.CommonUtil;
 import com.anwang.utils.TimeUtil;
 
 import javax.swing.*;
@@ -16,8 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UpgradeDialog {
-    public static void show(String contractName) {
-        JDialog dialog = new JDialog(App.app, "合约升级", true);
+    public static void show(String zhContractName, String contractName) {
+        JDialog dialog = new JDialog(App.app, zhContractName + "升级", true);
         dialog.setLayout(new BorderLayout());
         dialog.getRootPane().registerKeyboardAction(e -> dialog.dispose(), KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), JComponent.WHEN_IN_FOCUSED_WINDOW);
 

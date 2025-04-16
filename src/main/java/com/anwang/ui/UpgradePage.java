@@ -124,7 +124,7 @@ public class UpgradePage extends JPanel {
             upgradeButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    UpgradeDialog.show(table.getValueAt(table.getSelectedRow(), 1).toString());
+                    UpgradeDialog.show(table.getValueAt(table.getSelectedRow(), 0).toString(), table.getValueAt(table.getSelectedRow(), 1).toString());
                 }
             });
 
@@ -173,7 +173,7 @@ public class UpgradePage extends JPanel {
             transferOwnershipButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    TransferOwnershipDialog.show(table.getValueAt(table.getSelectedRow(), 1).toString());
+                    TransferOwnershipDialog.show(table.getValueAt(table.getSelectedRow(), 0).toString(), table.getValueAt(table.getSelectedRow(), 1).toString());
                 }
             });
         }
